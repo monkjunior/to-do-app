@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import firebase from './Firebase';
+import Main from './components/Main';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection('tasks');
+    this.unsubscribe = null;
+    this.state = {
+      tasks: []
+    };
+  }
+
+  onCollectionUpdate = (querySnapshot) => {
+    const tasks = [];
+    querySnapshot.forEach((task) => {
+      const { detail, name, time } = task.data();
+      tasks.push({
+        key: task.id,
+        task, // DocumentSnapshot
+        detail,
+        name,
+        time,
+      });
+      console.log(task.data());
+      console.log(tasks);
+    });
+    this.setState({
+      tasks: tasks
+    });
+    console.log(this.state);
+  }
+
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
+
+  render(){
+    console.log(this.state);
+    return (
+      <div className="App">
+        <Main tasks={this.state.tasks} />
+      </div>
+    );
+  }
+    
 }
 
 export default App;

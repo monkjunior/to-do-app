@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+2&display=swap&subset=vietnamese');
+
+
+
+body {
+    background-color: #1e2125;
+    color: white;
+    font-family: 'Baloo 2', cursive;
+}
+
+.activity-title, .to-do-title {
+    font-size: 1.75rem;
+    font-weight: 500;
+    
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.to-do, .activity {
+    background-color: #292f34;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 10px;
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.task {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0 10px  0 10px;
+    border-radius: 5px;
+    display: flex;
+}
+
+.task-content {
+    flex: 4 0 0;
+}
+
+.task-name {
+    color: #57be88;
+    font-weight: 700;
+}
+.task-detail {
+    padding: 0 10px 0 10px;
+}
+.task-time {
+    text-align: left;
+    color: rgb(202, 74, 74);
+    padding: 0 0 20px 0;
+}
+
+.task-line {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-line-tail {
+    left: 8px;
+    height: 100%;
+    border-left: 2px solid #e4e7ed;
+    margin-left: 5px;
+}
+
+.task-line-node {
+    margin-top: 1px;
+    background-color: rgb(11, 189, 135);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.task:hover{
+    background-color: #161a1d;
+}
+
+.task-wrapper {
+    max-height: 200px;
+    overflow: auto;
+}
+
+.task-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+
+.task-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #9acc14;
+}
+
+form{
+	padding: 20px 0;
+	position: relative;
+    z-index: 2;
+    justify-items: center;
+}	
+input, textarea{
+	display: block;
+	appearance: none;
+    outline: 0;
+    border: none;
+	background-color: #1e2125;
+	width: 400px;
+	border-radius: 3px;
+	padding: 10px 15px;
+	margin: 0 auto 10px auto;
+	display: block;
+	text-align: left;
+	font-size: 14px;
+	color: white;
+	font-weight: 300;
+}
+
+textarea {
+    resize: none;
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
+button{
+    appearance: none;
+	outline: 0;
+	background-color: rgb(11, 189, 135);
+	border: 0;
+	padding: 10px 15px;
+	color:  white;
+	border-radius: 3px;
+	width: 200px;
+	cursor: pointer;
+	font-size: 14px;
+	transition-duration: 0.25s;
+}	
+button:hover{
+    color: #1e2125;
+	background-color: rgb(245, 247, 249);
+}
+
+textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #9acc14;
+}
