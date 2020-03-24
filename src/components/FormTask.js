@@ -45,7 +45,7 @@ class FormTask extends Component{
         return(
             <form>
                 <input type="text" placeholder="Task name" id="task-name" />
-                <textarea name="" id="task-detail" cols="1" rows="6" placeholder="Detail ..."></textarea>
+                <textarea name="" id="task-detail" cols="1" rows="1" placeholder="Detail ..."></textarea>
                 <div className="button-wrapper">
                     <button type="submit" id="add-button" onClick={this.handleAdd}>Add</button>
                     <button type="submit" id="delete-button" onClick={this.handleDel}>Delete</button>
