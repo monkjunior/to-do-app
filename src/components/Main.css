@@ -80,7 +80,7 @@ body {
 }
 
 .task-wrapper {
-    max-height: 200px;
+    max-height: 800px;
     overflow: auto;
 }
 
@@ -95,6 +95,6 @@ body {
 
 
 .donetask-wrapper {
-    max-height: 500px;
+    max-height: 1100px;
     overflow: auto;
 }
