@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import firebase from '../Firebase';
 
-class Task extends Component{
+class DoneTask extends Component {
     constructor(props){
         super(props);
         this.ref = firebase.firestore().collection('tasks');
@@ -9,12 +9,11 @@ class Task extends Component{
         this.handleClick = this.handleClick.bind(this);
         this.handleDblClick = this.handleDblClick.bind(this);
         this.delete = this.delete.bind(this);
-        this.makeDone = this.makeDone.bind(this);
     }
 
     handleClick(e){
         let id = e.currentTarget.id.toString() ;
-        this.makeDone(id);
+        this.makeUnDone(id);
     }
 
     handleDblClick(e) {
@@ -23,42 +22,41 @@ class Task extends Component{
     }
 
     delete(id){
-        this.ref.doc(id).delete()
+        this.log.doc(id).delete()
         .then(() => {
-            console.log("TASKS COLLECTION:Document successfully deleted!");
+            console.log("DONE COLLECTION: Document successfully deleted!");
         })
         .catch((error) => {
-            console.error("TASKS COLLECTION: Error in deleting document: ", error);
+            console.error("DONE COLLECTION: Error in deleting document: ", error);
         });
     }
 
-    makeDone(old_id){
-        let task = this.ref.doc(old_id).get()
+    makeUnDone(old_id){
+        let task = this.log.doc(old_id).get()
         .then((doc) => {
             if (doc.exists) {
                 let {name, detail, time, id } = doc.data();
                 let currentTime = new Date();
                 id = currentTime.getTime().toString();
                 time = `${currentTime.toLocaleDateString()}  |  ${currentTime.toLocaleTimeString()}` ;
-                this.log.doc(id).set({
+                this.ref.doc(id).set({
                     id,
                     name,
                     detail,
                     time,
                 });
-                console.log("TASKS COLLECTION --> DONE COLLECTION : Done", doc.data());
+                console.log("DONE COLLECTION  --> TASKS COLLECTION : UnDone", doc.data());
                 this.delete(old_id);
             } else {
                 // doc.data() will be undefined in this case
-                console.log("TASKS COLLECTION --> DONE COLLECTION : Error");
+                console.log("DONE COLLECTION  --> TASKS COLLECTION : Error");
             }
         })
         .catch((error)=>{
-            console.error("TASKS COLLECTION: Error moving document: ", error);
+            console.error("DONE COLLECTION: Error moving document: ", error);
         })
         ;
     }
-    
 
     render(){
         return(
@@ -85,4 +83,4 @@ class Task extends Component{
     }
 }
 
-export default Task;
+export default DoneTask;

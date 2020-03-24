@@ -8,41 +8,64 @@ class Main extends Component{
     constructor(props) {
         super(props);
         this.ref = firebase.firestore().collection('tasks');
+        this.log = firebase.firestore().collection('done');
         this.unsubscribe = null;
         this.state = {
-          tasks: []
+          tasks: [],
+          done: []
         };
       }
     
-    onCollectionUpdate = (querySnapshot) => {
+    onToDoCollectionUpdate = (querySnapshot) => {
         const tasks = [];
         querySnapshot.forEach((task) => {
-          const { detail, name, time } = task.data();
+          const {name, detail, time, id } = task.data();
+          console.log(task.data());
+          console.log(name);
           tasks.push({
-            key: task.id,
+            id,
             task, // DocumentSnapshot
             detail,
             name,
             time,
           });
-          console.log(task.data());
-          console.log(tasks);
         });
         this.setState({
           tasks: tasks
         });
-        console.log(this.state);
+        console.log(this.state.tasks[0]);
     }
+
+    onDoneCollectionUpdate = (querySnapshot) => {
+      const tasks = [];
+      querySnapshot.forEach((task) => {
+        const {name, detail, time, id } = task.data();
+        console.log(task.data());
+        console.log(name);
+        tasks.push({
+          id,
+          task, // DocumentSnapshot
+          detail,
+          name,
+          time,
+        });
+      });
+      this.setState({
+        done: tasks
+      });
+      console.log(this.state.done[0]);
+  }
     
     componentDidMount() {
-        this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+        this.unsubscribe = this.ref.onSnapshot(this.onToDoCollectionUpdate);
+        this.unsubscribe = this.log.onSnapshot(this.onDoneCollectionUpdate);
     }
 
     render(){
         return(
             <div className="main">
                 <ToDo tasks={this.state.tasks} />
-                <Activity />
+                <Activity tasks={this.state.done}/>
             </div>
         );
     }

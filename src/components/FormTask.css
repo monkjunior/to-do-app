@@ -1,0 +1,77 @@
+form{
+	padding: 20px 0;
+	position: relative;
+    z-index: 2;
+    justify-items: center;
+}	
+input, textarea{
+	display: block;
+	appearance: none;
+    outline: 0;
+    border: none;
+	background-color: #1e2125;
+	width: 400px;
+	border-radius: 3px;
+	padding: 10px 15px;
+	margin: 0 auto 10px auto;
+	display: block;
+	text-align: left;
+	font-size: 14px;
+	color: white;
+	font-weight: 300;
+}
+
+textarea {
+    resize: none;
+}
+
+.button-wrapper {
+    text-align: center;
+}
+
+#add-button{
+    margin: 5px;
+    appearance: none;
+	outline: 0;
+	background-color: rgb(11, 189, 135);
+	border: 0;
+	padding: 10px 15px;
+	color:  white;
+	border-radius: 3px;
+	width: 200px;
+	cursor: pointer;
+	font-size: 14px;
+	transition-duration: 0.25s;
+}	
+#add-button:hover{
+    color: #1e2125;
+	background-color: rgb(245, 247, 249);
+}
+
+#delete-button{
+    margin: 5px;
+    appearance: none;
+	outline: 0;
+	background-color: rgb(104, 124, 118);
+	border: 0;
+	padding: 10px 15px;
+	color:  white;
+	border-radius: 3px;
+	width: 200px;
+	cursor: pointer;
+	font-size: 14px;
+	transition-duration: 0.25s;
+}	
+#delete-button:hover{
+    color: #1e2125;
+	background-color: rgb(202, 74, 74);
+}
+
+textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #9acc14;
+}
