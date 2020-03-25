@@ -28,6 +28,8 @@ class FormTask extends Component{
             })
             .then((docRef)=>{
                 console.log("Adding Document Successfully");
+                document.getElementById('task-name').value = "";
+                document.getElementById('task-detail').value = "";
             }
             )
             .catch((err)=>{
