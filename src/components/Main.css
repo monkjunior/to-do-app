@@ -21,7 +21,7 @@ body {
 
 .to-do, .activity {
     background-color: #292f34;
-    padding: 30px;
+    padding: 10px 30px 10px 30px;
     margin: 10px;
     border-radius: 10px;
     flex: 1 0 0;
@@ -80,7 +80,7 @@ body {
 }
 
 .task-wrapper {
-    max-height: 230px;
+    max-height: 300px;
     overflow: auto;
 }
 
@@ -97,4 +97,13 @@ body {
 .donetask-wrapper {
     max-height: 500px;
     overflow: auto;
+}
+
+.donetask-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+
+.donetask-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #9acc14;
 }
