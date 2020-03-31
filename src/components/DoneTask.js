@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import firebase from '../Firebase';
 
 class DoneTask extends Component {
@@ -22,40 +23,11 @@ class DoneTask extends Component {
     }
 
     delete(id){
-        this.log.doc(id).delete()
-        .then(() => {
-            console.log("DONE COLLECTION: Document successfully deleted!");
-        })
-        .catch((error) => {
-            console.error("DONE COLLECTION: Error in deleting document: ", error);
-        });
+        this.props.deleteTask(id);
     }
 
-    makeUnDone(old_id){
-        let task = this.log.doc(old_id).get()
-        .then((doc) => {
-            if (doc.exists) {
-                let {name, detail, time, id } = doc.data();
-                let currentTime = new Date();
-                id = currentTime.getTime().toString();
-                time = `${currentTime.toLocaleDateString()}  |  ${currentTime.toLocaleTimeString()}` ;
-                this.ref.doc(id).set({
-                    id,
-                    name,
-                    detail,
-                    time,
-                });
-                console.log("DONE COLLECTION  --> TASKS COLLECTION : UnDone", doc.data());
-                this.delete(old_id);
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("DONE COLLECTION  --> TASKS COLLECTION : Error");
-            }
-        })
-        .catch((error)=>{
-            console.error("DONE COLLECTION: Error moving document: ", error);
-        })
-        ;
+    makeUnDone(id){
+        this.props.makeUnDone(id);
     }
 
     render(){
@@ -83,4 +55,19 @@ class DoneTask extends Component {
     }
 }
 
-export default DoneTask;
+const mapStateToProps = (state, ownProps) => {
+    return ownProps;
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      deleteTask: (id) => {
+        dispatch({type: 'DELETE_DONE_TASK', id: id})
+      },
+      makeUnDone: (id) => {
+        dispatch({type: 'MAKE_UNDONE', id: id})
+      }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DoneTask)

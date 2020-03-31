@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import firebase from '../Firebase';
-
+import { connect } from 'react-redux';
 class Task extends Component{
     constructor(props){
         super(props);
-        this.ref = firebase.firestore().collection('tasks');
-        this.log = firebase.firestore().collection('done');
         this.handleClick = this.handleClick.bind(this);
         this.handleDblClick = this.handleDblClick.bind(this);
         this.delete = this.delete.bind(this);
@@ -23,44 +20,16 @@ class Task extends Component{
     }
 
     delete(id){
-        this.ref.doc(id).delete()
-        .then(() => {
-            console.log("TASKS COLLECTION:Document successfully deleted!");
-        })
-        .catch((error) => {
-            console.error("TASKS COLLECTION: Error in deleting document: ", error);
-        });
+        this.props.deleteTask(id);
     }
 
-    makeDone(old_id){
-        let task = this.ref.doc(old_id).get()
-        .then((doc) => {
-            if (doc.exists) {
-                let {name, detail, time, id } = doc.data();
-                let currentTime = new Date();
-                id = currentTime.getTime().toString();
-                time = `${currentTime.toLocaleDateString()}  |  ${currentTime.toLocaleTimeString()}` ;
-                this.log.doc(id).set({
-                    id,
-                    name,
-                    detail,
-                    time,
-                });
-                console.log("TASKS COLLECTION --> DONE COLLECTION : Done", doc.data());
-                this.delete(old_id);
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("TASKS COLLECTION --> DONE COLLECTION : Error");
-            }
-        })
-        .catch((error)=>{
-            console.error("TASKS COLLECTION: Error moving document: ", error);
-        })
-        ;
+    makeDone(id){
+        this.props.makeDone(id);
     }
     
 
     render(){
+        console.log(this.props);
         return(
             <li className="task" id={this.props.id} onDoubleClick={this.handleDblClick} onClick={this.handleClick}>
                 <div className="task-line">
@@ -85,4 +54,19 @@ class Task extends Component{
     }
 }
 
-export default Task;
+const mapStateToProps = (state, ownProps) => {
+    return ownProps;
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      deleteTask: (id) => {
+        dispatch({type: 'DELETE_TASK', id: id})
+      },
+      makeDone: (id) => {
+        dispatch({type: 'MAKE_DONE', id: id})
+      }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Task)

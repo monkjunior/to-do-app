@@ -1,10 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Task from './Task';
 import FormTask from './FormTask';
 
 function ToDo(props){
-    const {tasks} = props;
-    console.log("To do " + props);
+    const tasks = props.todos;
     const taskList = tasks.map(task => {
         return(
             <Task name={task.name} detail={task.detail} time={task.time} id={task.id} key={task.id}/>
@@ -25,5 +25,10 @@ function ToDo(props){
         </div>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+      todos : state.todos,
+    }
+  }
 
-export default ToDo;
+export default connect(mapStateToProps)(ToDo);
