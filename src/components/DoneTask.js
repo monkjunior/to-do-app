@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import firebase from '../Firebase';
 
 class DoneTask extends Component {
     constructor(props){
         super(props);
-        this.ref = firebase.firestore().collection('tasks');
-        this.log = firebase.firestore().collection('done');
         this.handleClick = this.handleClick.bind(this);
         this.handleDblClick = this.handleDblClick.bind(this);
         this.delete = this.delete.bind(this);
+        this.makeUnDone = this.makeUnDone.bind(this);
     }
 
     handleClick(e){
