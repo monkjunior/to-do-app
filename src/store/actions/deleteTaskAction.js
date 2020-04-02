@@ -1,21 +1,18 @@
-export const makeDoneAction = (id) => {
+export const deleteTaskAction = (id, collection) => {
     return (dispatch, getState, { getFirebase, getFirestore} ) => {
         // make asyn call to db
         const firestore = getFirestore();
-        firestore.collection('projects').doc(id).set({
-            id: id,
-            content: "redux-firebase"
-        })
+        firestore.collection(collection).doc(id).delete()
         .then(()=>{
             dispatch({
-                type: 'MAKE_DONE',
+                type: 'DELETE_TASK',
                 id: id
             })
         })
         .catch((err)=>{
             dispatch({
-                type: 'MAKE_DONE_ERR',
-                id: err
+                type: 'DELETE_TASK_ERR',
+                err: err
             })
         });
     }

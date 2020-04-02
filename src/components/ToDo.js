@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 import Task from './Task';
 import FormTask from './FormTask';
+import { firestore } from 'firebase';
 
 function ToDo(props){
     const tasks = props.todos;
@@ -27,9 +30,13 @@ function ToDo(props){
 }
 const mapStateToProps = (state) => {
     return {
-        done: state.done,
-        todos: state.todos
+        todos: state.firestore.ordered.tasks || state.tasks.todos
     }
 }
 
-export default connect(mapStateToProps)(ToDo);
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'tasks'}
+    ])
+)(ToDo);

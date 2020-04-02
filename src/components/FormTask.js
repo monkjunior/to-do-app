@@ -1,46 +1,33 @@
 import React, {Component} from 'react';
 import firebase from '../config/Firebase';
+import { connect } from 'react-redux';
+import { createTaskAction } from '../store/actions/createTaskAction';
 import './FormTask.css';
 
 class FormTask extends Component{
     constructor(props){
         super(props);
-        this.ref = firebase.firestore().collection('tasks');
         this.handleAdd = this.handleAdd.bind(this);
-        this.handleDel = this.handleDel.bind(this);
     }
 
     handleAdd = function(e){
         e.preventDefault();
         let name = document.getElementById('task-name').value;
         if (name !== ""){
-            console.log("start");
             let detail = document.getElementById('task-detail').value;
             let taskTime = new Date();
-            let id = taskTime.getTime();
+            let id = taskTime.getTime().toString();
             let time = `${taskTime.toLocaleDateString()}  |  ${taskTime.toLocaleTimeString()}` ;
-            console.log(taskTime);
-            this.ref.doc(id.toString()).set({
+            this.props.createTask({
                 id,
                 name,
                 detail,
                 time,
             })
-            .then((docRef)=>{
-                console.log("Adding Document Successfully");
-                document.getElementById('task-name').value = "";
-                document.getElementById('task-detail').value = "";
-            }
-            )
-            .catch((err)=>{
-                console.log("Adding Error" + err);
-            });
+            console.log("Adding Document " + id + " Successfully");
+            document.getElementById('task-name').value = "";
+            document.getElementById('task-detail').value = "";
         }
-    }
-
-    handleDel = function(e){
-        e.preventDefault();
-        console.log("Handle Del");
     }
 
     render(){
@@ -56,4 +43,19 @@ class FormTask extends Component{
     }
 }
 
-export default FormTask;
+const mapStateToProps = (state) => {
+    return {
+        done: state.done,
+        todos: state.todos
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+      createTask: (task) => {
+        dispatch(createTaskAction(task))
+      }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormTask)
