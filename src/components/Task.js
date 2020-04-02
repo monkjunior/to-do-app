@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { makeDoneAction } from '../store/actions/taskActions';
 import './Task.css';
 class Task extends Component{
     constructor(props){
@@ -58,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
         dispatch({type: 'DELETE_TASK', id: id})
       },
       makeDone: (id) => {
-        dispatch({type: 'MAKE_DONE', id: id})
+        dispatch(makeDoneAction(id))
       }
     }
 }

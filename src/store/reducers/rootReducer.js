@@ -64,6 +64,7 @@ const rootReducer = (state = initState, action) => {
                 done: newDone
             }
         default:
+            console.log(action);
             break;
     }
     return state;

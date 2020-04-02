@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import firebase from '../Firebase';
+import firebase from '../config/Firebase';
 import './FormTask.css';
 
 class FormTask extends Component{

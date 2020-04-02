@@ -1,5 +1,5 @@
 #delete-button{
-    margin: 5px;
+    margin: 10px;
     appearance: none;
     outline: 0;
     background: url('../images/garbage.png') no-repeat center;
@@ -20,7 +20,7 @@
 }
 
 #undone-button{
-    margin: 5px;
+    margin: 10px;
     appearance: none;
     outline: 0;
     background: url('../images/undone.png') no-repeat center;
@@ -41,7 +41,7 @@
 }
 
 #done-button{
-    margin: 5px;
+    margin: 10px;
     appearance: none;
     outline: 0;
     background: url('../images/done.png') no-repeat center;
