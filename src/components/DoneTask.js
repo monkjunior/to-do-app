@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-
+import { makeUnDoneAction } from '../store/actions/makeUnDoneAction';
+import { deleteTaskAction } from '../store/actions/deleteTaskAction';
 class DoneTask extends Component {
     constructor(props){
         super(props);
@@ -54,10 +55,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       deleteDoneTask: (id) => {
-        dispatch({type: 'DELETE_DONE_TASK', id: id})
+        dispatch(deleteTaskAction(id, 'done'))
       },
       makeUnDone: (id) => {
-        dispatch({type: 'MAKE_UNDONE', id: id})
+        dispatch(makeUnDoneAction(id))
       }
     }
 }

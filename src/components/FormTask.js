@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import firebase from '../config/Firebase';
 import { connect } from 'react-redux';
-import { createTaskAction } from '../store/actions/taskActions';
+import { createTaskAction } from '../store/actions/createTaskAction';
 import './FormTask.css';
 
 class FormTask extends Component{
@@ -14,12 +14,10 @@ class FormTask extends Component{
         e.preventDefault();
         let name = document.getElementById('task-name').value;
         if (name !== ""){
-            console.log("start");
             let detail = document.getElementById('task-detail').value;
             let taskTime = new Date();
             let id = taskTime.getTime().toString();
             let time = `${taskTime.toLocaleDateString()}  |  ${taskTime.toLocaleTimeString()}` ;
-            console.log(taskTime);
             this.props.createTask({
                 id,
                 name,
@@ -45,6 +43,13 @@ class FormTask extends Component{
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        done: state.done,
+        todos: state.todos
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
       createTask: (task) => {
@@ -53,4 +58,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(FormTask)
+export default connect(mapStateToProps, mapDispatchToProps)(FormTask)

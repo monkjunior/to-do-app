@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { makeDoneAction } from '../store/actions/taskActions';
+import { makeDoneAction } from '../store/actions/makeDoneAction';
+import { deleteTaskAction } from '../store/actions/deleteTaskAction';
 import './Task.css';
 class Task extends Component{
     constructor(props){
@@ -20,7 +21,6 @@ class Task extends Component{
     }  
 
     render(){
-        console.log(this.props);
         return(
             <li className="task" id={this.props.id}>
                 <div className="task-line">
@@ -56,7 +56,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       deleteTask: (id) => {
-        dispatch({type: 'DELETE_TASK', id: id})
+        dispatch(deleteTaskAction(id, 'tasks'))
       },
       makeDone: (id) => {
         dispatch(makeDoneAction(id))

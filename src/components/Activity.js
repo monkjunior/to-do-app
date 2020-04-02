@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 import DoneTask from './DoneTask';
+import { firestore } from 'firebase';
 
 function Activity(props){
     const tasks = props.done;
@@ -24,9 +27,13 @@ function Activity(props){
 
 const mapStateToProps = (state) => {
     return {
-      done: state.done,
-      todos: state.todos
+        done: state.firestore.ordered.done || state.tasks.done
     }
 }
 
-export default connect(mapStateToProps)(Activity);
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'done'}
+    ])
+)(Activity);
