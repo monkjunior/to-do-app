@@ -63,6 +63,8 @@ const rootReducer = (state = initState, action) => {
                 ...state,
                 done: newDone
             }
+        case 'CREATE_TASK':
+            console.log('CREATE_TASK');
         default:
             console.log(action);
             break;
