@@ -14,7 +14,58 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
-    console.log(action);
+    switch (action.type){
+        case 'MAKE_DONE':
+            console.log('MAKE_DONE');
+            let doneTask;
+            let newTodos1 = state.todos.filter(task => {
+                if(action.id === task.id){
+                    doneTask = task;
+                }
+                return action.id !== task.id;
+            });
+            let newDone1 = state.done;
+            newDone1.push(doneTask);
+            return {
+                todos: newTodos1,
+                done: newDone1
+            }
+        case 'MAKE_UNDONE':
+            console.log('MAKE_UNDONE');
+            let undoneTask;
+            let newDone2 = state.done.filter(task => {
+                if(action.id === task.id){
+                    undoneTask = task;
+                }
+                return action.id !== task.id;
+            });
+            let newTodos2 = state.todos;
+            newTodos2.push(undoneTask);
+            return {
+                todos: newTodos2,
+                done: newDone2
+            }
+        case 'DELETE_TASK':
+            console.log('DELETE_TASK');
+            let newTodos = state.todos.filter(task => {
+                return action.id !== task.id;
+            });
+            return {
+                ...state,
+                todos: newTodos
+            }
+        case 'DELETE_DONE_TASK':
+            console.log('DELETE_DONE_TASK');
+            let newDone = state.done.filter(task => {
+                return action.id !== task.id;
+            });
+            return {
+                ...state,
+                done: newDone
+            }
+        default:
+            break;
+    }
     return state;
 }
 

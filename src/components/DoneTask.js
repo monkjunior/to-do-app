@@ -5,32 +5,22 @@ class DoneTask extends Component {
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
-        this.handleDblClick = this.handleDblClick.bind(this);
-        this.delete = this.delete.bind(this);
-        this.makeUnDone = this.makeUnDone.bind(this);
+        this.handleButton = this.handleButton.bind(this);
     }
 
     handleClick(e){
-        let id = e.currentTarget.id.toString() ;
-        this.makeUnDone(id);
-    }
-
-    handleDblClick(e) {
-        let id = e.currentTarget.id.toString() ;
-        this.delete(id);
-    }
-
-    delete(id){
-        this.props.deleteTask(id);
-    }
-
-    makeUnDone(id){
+        let id = this.props.id.toString() ;
         this.props.makeUnDone(id);
+    }
+
+    handleButton(e) {
+        let id = this.props.id.toString() ;
+        this.props.deleteDoneTask(id);
     }
 
     render(){
         return(
-            <li className="task" id={this.props.id} onDoubleClick={this.handleDblClick} onClick={this.handleClick}>
+            <li className="task" id={this.props.id} >
                 <div className="task-line">
                     <div className="task-line-node"></div>
                     <div className="task-line-tail"></div>
@@ -47,6 +37,10 @@ class DoneTask extends Component {
                     <div className="task-time">
                         {this.props.time}
                     </div>
+                    <div className="button-wrapper">
+                        <button id="undone-button" onClick={this.handleClick}></button>
+                        <button id="delete-button" onClick={this.handleButton}></button>
+                    </div>
                 </div>
             </li>
         )
@@ -59,7 +53,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      deleteTask: (id) => {
+      deleteDoneTask: (id) => {
         dispatch({type: 'DELETE_DONE_TASK', id: id})
       },
       makeUnDone: (id) => {

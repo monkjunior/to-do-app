@@ -24,15 +24,9 @@ function Activity(props){
 
 const mapStateToProps = (state) => {
     return {
-      done: state.done
-    }
-  }
-  
-const mapDispatchToProps = (dispatch) => {
-    return {
-      deleteTask: (id) => {
-        dispatch({type: 'DELETE_TASK', id: id})
-      }
+      done: state.done,
+      todos: state.todos
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Activity);
+
+export default connect(mapStateToProps)(Activity);

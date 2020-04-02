@@ -38,7 +38,7 @@ textarea {
 	padding: 10px 15px;
 	color:  white;
 	border-radius: 3px;
-	width: 200px;
+	width: 430px;
 	cursor: pointer;
 	font-size: 14px;
 	transition-duration: 0.25s;
@@ -46,25 +46,6 @@ textarea {
 #add-button:hover{
     color: #1e2125;
 	background-color: rgb(245, 247, 249);
-}
-
-#delete-button{
-    margin: 5px;
-    appearance: none;
-	outline: 0;
-	background-color: rgb(104, 124, 118);
-	border: 0;
-	padding: 10px 15px;
-	color:  white;
-	border-radius: 3px;
-	width: 200px;
-	cursor: pointer;
-	font-size: 14px;
-	transition-duration: 0.25s;
-}	
-#delete-button:hover{
-    color: #1e2125;
-	background-color: rgb(202, 74, 74);
 }
 
 textarea::-webkit-scrollbar {

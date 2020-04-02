@@ -1,0 +1,62 @@
+#delete-button{
+    margin: 5px;
+    appearance: none;
+    outline: 0;
+    background: url('../images/garbage.png') no-repeat center;
+	background-color: rgb(104, 124, 118);
+	border: 0;
+	padding: 10px 15px;
+	color:  white;
+	border-radius: 50%;
+    width: 40px;
+    height: 40px;
+	cursor: pointer;
+	font-size: 14px;
+	transition-duration: 0.25s;
+}	
+#delete-button:hover{
+    color: #1e2125;
+	background-color: rgb(202, 74, 74);
+}
+
+#undone-button{
+    margin: 5px;
+    appearance: none;
+    outline: 0;
+    background: url('../images/undone.png') no-repeat center;
+	background-color: rgb(104, 124, 118);
+	border: 0;
+	padding: 10px 15px;
+	color:  white;
+	border-radius: 50%;
+    width: 40px;
+    height: 40px;
+	cursor: pointer;
+	font-size: 14px;
+	transition-duration: 0.25s;
+}	
+#undone-button:hover{
+    color: #1e2125;
+	background-color: rgb(202, 74, 74);
+}
+
+#done-button{
+    margin: 5px;
+    appearance: none;
+    outline: 0;
+    background: url('../images/done.png') no-repeat center;
+	background-color: rgb(104, 124, 118);
+	border: 0;
+	padding: 10px 15px;
+	color:  white;
+	border-radius: 50%;
+    width: 40px;
+    height: 40px;
+	cursor: pointer;
+	font-size: 14px;
+	transition-duration: 0.25s;
+}	
+#done-button:hover{
+    color: #1e2125;
+	background-color:  rgb(11, 189, 135);
+}

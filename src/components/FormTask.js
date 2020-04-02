@@ -50,7 +50,6 @@ class FormTask extends Component{
                 <textarea name="" id="task-detail" cols="1" rows="2" placeholder="Detail ..."></textarea>
                 <div className="button-wrapper">
                     <button type="submit" id="add-button" onClick={this.handleAdd}>Add</button>
-                    <button type="submit" id="delete-button" onClick={this.handleDel}>Delete</button>
                 </div>
             </form>
         )

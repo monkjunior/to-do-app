@@ -27,8 +27,9 @@ function ToDo(props){
 }
 const mapStateToProps = (state) => {
     return {
-      todos : state.todos,
+        done: state.done,
+        todos: state.todos
     }
-  }
+}
 
 export default connect(mapStateToProps)(ToDo);
